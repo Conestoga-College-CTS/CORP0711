@@ -12,15 +12,13 @@ Before you begin, ensure you have met the following requirements:
 
 To install the microservice, follow these steps:
 
-1. Clone the repository or download the source code to your local machine.
-
-2. Navigate to the project directory:
+1. Navigate to the project directory:
 
     ```bash
     cd Project-02.04-Basic_Microservice
     ```
 
-3. Install the necessary npm packages:
+2. Install the necessary npm packages:
 
     ```bash
     npm install
@@ -40,11 +38,11 @@ Start the server by running:
 node index.js
 ```
 
-### Sending Requests
+## Sending Requests
 
 You can append messages to the file either by using a web browser or by using the `curl` command in a terminal. Here's how to do both:
 
-#### Using a Web Browser
+### Using a Web Browser
 
 Simply navigate to the URL `http://localhost:3000/message/{YourMessageHere}` in your web browser. Replace `{YourMessageHere}` with the actual message you want to append. For example:
 
@@ -53,7 +51,7 @@ http://localhost:3000/message/HelloWorld
 
 This will append "HelloWorld" to the `message.txt` file. Note that URL encoding applies, so for messages containing spaces or special characters, you'll need to encode them. For example, "Hello World" should be entered as "Hello%20World".
 
-#### Using curl
+### Using curl
 
 To send a request via the terminal, you can use the `curl` command. Format your request like this:
 
