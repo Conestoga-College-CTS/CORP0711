@@ -43,7 +43,7 @@ console.log(!(function(){})); // false, because a function is truthy
 // For ==, type coercion occurs, so different types can still be considered equal 
 // if their coerced values are the same
 result = "5" == 5; // result: true, Loose equality checks value ignoring the type
-result = "5" == 5; // result: true, Loose equality checks value ignoring the type
+result = 5 == 5; // result: true
 
 // For ===, checks for value and type, so no coercion occurs
 result = "5" === 5; // result: false, Strict equality checks both value and type
