@@ -2,12 +2,14 @@
 
 docker search linux
 
+# ----------------------------------------
 # DOCKER PULL
 
 docker pull ubuntu
 
 docker image ls
 
+# ----------------------------------------
 # DOCKER RUN
 	
 docker run --name my_alpine -it alpine /bin/sh
@@ -26,6 +28,9 @@ docker exec -it my_mqtt sh
 
 docker ps
 
+# List docker containers with custom format
+docker ps -a --format "table {{.ID}}\t{{.Status}}\t{{.Names}}"
+
 docker stop my_mqtt
 
 docker rm my_mqtt
@@ -42,6 +47,7 @@ docker run --name my_mqtt -d -p 3883:1883 -p 3001:9001 -v /Users/shrestha/mosqui
 
 less mosquitto.conf
 
+# ----------------------------------------
 # DOCKER EXEC
 
 docker exec -it my_postgres /bin/bash
@@ -54,6 +60,7 @@ echo "sample text" | docker exec -w /mosquitto/config my_mqtt cat > mosquitto.co
 
 echo "sample text" | docker exec -i -w /mosquitto/config my_mqtt cat > mosquitto.conf
 
+# ----------------------------------------
 # DOCKER LOGS
 
 docker logs my_postgres                                                                     
@@ -68,6 +75,7 @@ docker logs my_postgres --since 2021-05-01T00:00:00
 
 docker stop my_postgres
 
+# ----------------------------------------
 # DOCKER NETWORK
 
 docker network create --driver bridge my-network
@@ -102,6 +110,7 @@ docker inspect c2
 
 docker inspect c1
 
+# ----------------------------------------
 # DOCKER VOLUME
 
 docker volume create my-vol
@@ -116,6 +125,7 @@ docker stop my_alpine
 
 docker rm my-vol
 
+# ----------------------------------------
 # DOCKER BUILD - Project-02.02-Docker-Build
 
 docker build -t ps/web1 .
@@ -130,6 +140,7 @@ docker image rm prashanta/node-web-app
 
 docker image ls
 
+# ----------------------------------------
 # DOCKER COMPOSE - Project-02.03-Docker-Compose
 
 docker-compose up -d
@@ -172,3 +183,57 @@ docker-compose kill
 docker --help
 docker run --help
 docker exec --help
+
+# ----------------------------------------
+# Check the ports used by a container
+docker port my_mqtt
+
+# ----------------------------------------
+# DISTRIBUTING DOCKER IMAGES - Using TAR File Transfer  
+# If you have a image called ps/web1 and you want to transfer it to another machine
+# Save the image to a tar file
+docker save -o my_web_image.tar ps/web1
+
+# Copy the tar file to another machine and load
+docker load -i my_web_image.tar
+
+# Create a container from the image
+docker run -d --name web1 -p 3000:3000 ps/web1
+
+# ----------------------------------------
+# DISTRIBUTING DOCKER IMAGES - Using your own Registry
+# If you have a image called ps/web1 and you want to transfer it to another machine
+# using your own registry. However this set up does not provide any authentication out of the box. 
+# For authentication you can use httpd or nginx as a reverse proxy with basic authentication.
+
+# Start a registry
+docker run -d -p 3050:5000 --name my_registry registry
+
+# The registry catalog can be listed using curl (or from browser)
+curl http://localhost:3050/v2/_catalog
+
+# Tag the image so that it can be pushed to my_registry
+# The tag takes this format: [REGISTRYHOST:PORT/][USERNAME/]NAME[:TAG]
+# REGISTRYHOST: The hostname or IP address of the Docker registry. If this part is omitted, Docker assumes the image is hosted on Docker Hub.
+# PORT: The port number of the Docker registry. If omitted, default port number of 5000.
+# USERNAME: The username or organization name on the Docker registry. This is often used on Docker Hub to specify user or organization repositories. If omitted, Docker assumes it's an official image maintained by Docker.
+# NAME: The name of the image, which should be descriptive and indicate the purpose or contents of the image.
+# TAG: A tag for the image, often used as a version number or environment identifier like latest, 3.1.4, stable, development, etc. If omitted, Docker defaults to using the latest tag.
+
+# Usage: docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+docker tag ps/web1 localhost:3050/ps/web1
+
+# Push the image to the registry
+# Usage: docker push [OPTIONS] NAME[:TAG]
+docker push localhost:3050/ps/web1
+
+# List the images in the registry using curl (or from browser)
+curl http://localhost:3050/v2/_catalog
+curl http://localhost:3050/v2/ps/web1/tags/list
+
+# Pull the image from the registry on a different machine using docker pull
+# Here the IP address is the IP address of the machine where the registry is running
+docker pull 192.168.1.100:3050/ps/web1
+
+# Verify the image
+docker image ls
