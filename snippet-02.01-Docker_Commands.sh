@@ -204,7 +204,8 @@ docker run -d --name web1 -p 3000:3000 ps/web1
 # DISTRIBUTING DOCKER IMAGES - Using your own Registry
 # If you have a image called ps/web1 and you want to transfer it to another machine
 # using your own registry. However this set up does not provide any authentication out of the box. 
-# For authentication you can use httpd or nginx as a reverse proxy with basic authentication.
+# Native option is available for authentication (https://distribution.github.io/distribution/about/deploying/#native-basic-auth) 
+# Alternatively use httpd or nginx (https://distribution.github.io/distribution/recipes/nginx/) as a reverse proxy with basic authentication.
 
 # Start a registry
 docker run -d -p 3050:5000 --name my_registry registry
