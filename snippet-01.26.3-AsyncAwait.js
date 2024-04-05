@@ -45,8 +45,8 @@ runAsyncTasks_2(6000); // this will take 6 seconds
 
 console.log('This line will be printed before the simulateLongTasks are completed - 2');
 
-// To run the two runAsyncTasks functions inside another async function
-// to make sure they are executed one after the other
+// To make sure that runAsyncTasks_1 and runAsyncTasks_2 are executed one after the other 
+// the need to be called inside an async function, so that await can be used like this:
 /*
 async function runAllAsyncTasks() {
   await runAsyncTasks_1(3000); // this will take 3 seconds
