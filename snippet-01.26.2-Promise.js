@@ -3,7 +3,7 @@
 // The simulateLongTask function returns a Promise object.
 
 function simulateLongTask(duration){
-  // For Promis to work, we need to return a new Promise object
+  // For Promise to work, we need to return a new Promise object
   // The Promise object takes a function as an argument
   // The function takes two arguments, resolve and reject
   // Resolve is a function that is called when the task is completed successfully
