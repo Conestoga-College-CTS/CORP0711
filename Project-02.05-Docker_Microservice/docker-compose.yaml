@@ -4,7 +4,7 @@ services:
     build: .
     container_name: my_ms_app
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - DATABASE_URL=postgresql://user:password@db:5432/dbname
     depends_on:
@@ -17,7 +17,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=dbname
     ports:
-      - "8432:5432"
+      - "9432:5432"
     volumes:
       - db-data-ms:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
