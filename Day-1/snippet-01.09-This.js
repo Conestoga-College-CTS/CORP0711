@@ -1,12 +1,15 @@
 // 'use strict';
 
-// In context of node.js this refers to module.exports not global object
-console.log(this === global); // Output: false
-console.log(this === module.exports); // Output: true
+// In context of node.js, this refers to module.exports not global object
+console.log("In context of node.js, this refers to module.exports not global object");
+console.log("this === global -> " + (this === global)); // Output: false
+console.log("this === module.exports -> " + (this === module.exports)); // Output: true
+console.log(this); // Output: {}
 
 // When this is used in a regular function, it will refer to the global object
 function regularFunction() {
-  console.log(this === global); // Output: true; unless in strict mode then it will be false
+  console.log(this); // Output: {} or undefined for strict mode
+  console.log("this === global -> " + (this === global)); // Output: true; unless in strict mode then it will be false
   console.log(this === module.exports); // Output: false
 }
 

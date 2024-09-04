@@ -16,7 +16,6 @@ if (number === 1) {
   console.log("One");
 }
 else if (number === 2) {
-
   console.log("Two");
 }
 else {
@@ -36,16 +35,19 @@ switch (day) {
 }
 
 // Loops - for, while, do-while
+console.log("\nLoop using 'for' statement:");
 for (let i = 0; i < 5; i++) {
   console.log(`Number ${i}`);
 }
 
+console.log("\nLoop using 'while' statement:");
 let i = 0;
 while (i < 5) {
   console.log(`Number ${i}`);
   i++;
 }
 
+console.log("\nLoop using 'do...while' statement:");
 let j = 0;
 do {
   console.log(`Number ${j}`);

@@ -10,7 +10,7 @@ eventEmitter.on('login', (user) => {
 const logoutHandler = (user) => {
   console.log(`${user} logged out`);
 };
-eventEmitter.on('logout', logoutHandler);
+eventEmitter.on('logout', logoutHandler); 
 
 // Emitting the 'login' event for a user
 eventEmitter.emit('login', 'JohnDoe');

@@ -1,4 +1,4 @@
-// var is hoisted - initialized with undefined
+// var is hoisted - initialized with 'undefined'
 console.log(x); // Output: undefined
 var x = 5;
 console.log(x); // Output: 5

@@ -24,3 +24,4 @@ class UserEvent extends EventEmitter {
 }
 
 module.exports = UserEvent;
+
