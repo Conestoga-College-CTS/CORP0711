@@ -1,4 +1,4 @@
-const UserEvent = require('./snippet-03.06.2-UserEvent');
+const UserEvent = require('./snippet-03.08.2-UserEvent');
 
 // Creating an instance of the User class
 const user = new UserEvent();
