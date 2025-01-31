@@ -36,6 +36,12 @@ http://localhost:3000/message/HelloWorld
 
 This will append "HelloWorld" to the `message.txt` file. Note that URL encoding applies, so for messages containing spaces or special characters, you'll need to encode them. For example, "Hello World" should be entered as "Hello%20World".
 
+To check the database table "messages" run this docker command:
+
+```bash
+docker exec -it my_ms_db psql -U user -d dbname -c "SELECT * FROM messages;"
+```
+
 ### Using curl
 
 To send a request via the terminal, you can use the `curl` command. Format your request like this:
